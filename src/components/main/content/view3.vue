@@ -3,8 +3,12 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-9">
+					<div class="set_title">
+						<span>设置标题</span>
+						<input type="text" name="titles" id="titles" ref="titles"/>
+					</div>
 					<div id="editorElem"></div>
-					<button v-on:click="getContent" id="save" class="pull-right">发布</button>
+					<button v-on:click="save_blog" id="save" class="pull-right ">发布</button>
 				</div>
 				<div class="col-md-3">
 					<div class="fabu">
@@ -18,7 +22,7 @@
 							<p class="option">
 								<span class="glyphicon glyphicon-eye-open"></span>
 								<span>公开度:</span>
-								<select name="">
+								<select v-model="selected">
 									<option value="0">公开</option>
 									<option value="1">不公开</option>
 								</select>
@@ -33,9 +37,7 @@
 			<div class="back text-left" @click="preview">
 				<button>返回编辑</button>
 			</div>
-			<div class="preview_content" v-html="editorContent">
-				
-			</div>
+			<div class="preview_content" v-html="editorContent"></div>
 		</div>
 	</div>
 
@@ -48,15 +50,30 @@
 		data() {
 			return {
 				editorContent: '',
+				title:'',
 				show: false,
+				selected:''
 			}
 		},
 		methods: {
 			getContent: function() {
-				alert(this.editorContent)
+//				alert(this.editorContent)
 			},
 			preview() {
 				this.show = !this.show;
+			},
+			save_blog(){
+				this.$http.post("http://localhost/data/save_blog.php",
+				{
+					content:this.editorContent,
+					title:this.$refs.titles.value,
+					time:new Date().toLocaleString(),
+					type:this.selected
+				},
+				{emulateJSON: true}
+				).then(function(res){
+					console.log(res)
+				})
 			}
 		},
 		mounted() {
@@ -64,7 +81,7 @@
 			editor.customConfig.onchange = (html) => {
 				this.editorContent = html
 			}
-			console.log(editor.customConfig)
+			  editor.customConfig.zIndex = 100
 			editor.create()
 		}
 	}
@@ -80,7 +97,7 @@
 	.watch_preview {
 		min-height: 100%;
 		width: 100%;
-		z-index: 100000;
+		z-index: 10001;
 		position: absolute;
 		top: -18px;
 		left: 0;
@@ -94,6 +111,7 @@
 		background: white;
 		box-shadow: 2px 2px 10px gainsboro;
 		overflow: auto;
+		font-size: 18px;
 	}
 	
 	#save {
@@ -139,6 +157,8 @@
 		padding: 8px 20px;
 	}
 	.preview_content{
+		box-sizing: border-box;
+		padding: 20px 80px;
 		overflow: hidden;
 	}
 </style>

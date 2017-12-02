@@ -59,7 +59,7 @@
   margin: 0 10px;
   padding-top: 10px;
   line-height: 30px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .glyphicon{
