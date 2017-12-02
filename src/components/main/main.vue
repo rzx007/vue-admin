@@ -19,9 +19,10 @@
 <style>
 	.rightWrap{
 		margin-left: 150px;
-		padding-left: 20px;
+		/*padding-left: 20px;*/
 		height: 100%;
 		overflow: scroll;
+		padding-top: 20px;
 	}
 	@media (max-width: 960px) {
 			.rightWrap{
