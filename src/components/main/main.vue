@@ -21,7 +21,7 @@
 		margin-left: 150px;
 		/*padding-left: 20px;*/
 		height: 100%;
-		overflow: scroll;
+		overflow: auto;
 		padding-top: 20px;
 	}
 	@media (max-width: 960px) {

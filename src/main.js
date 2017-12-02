@@ -3,10 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import "./assets/css/bootstrap.min.css";
-import"./assets/js/bootstrap.min.js";
+import "./assets/libs/css/bootstrap.min.css";
+import"./assets/libs/js/bootstrap.min.js";
+import vueResource from "vue-resource";
 Vue.config.productionTip = false
-
+Vue.use(vueResource)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

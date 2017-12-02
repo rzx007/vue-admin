@@ -42,9 +42,7 @@
   line-height: 30px;
   font-size: 14px;
 }
-a {
-  color: #42b983;
-}
+
 .glyphicon{
 	margin-right: 10px;
 	

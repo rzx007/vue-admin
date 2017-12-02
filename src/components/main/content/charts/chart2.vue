@@ -1,6 +1,6 @@
 <template>
 	<div class="chartWrap">
-		<div class="drag_handle">
+		<div class="drag_handle drag ">
 			<h4 class="text-left">用户访问来源</h4>
 		</div>
 		<div id="viewChart1"></div>
@@ -68,14 +68,15 @@
 	.chartWrap {
 		margin-bottom: 18px;
 		height: 310px;
-		background: #eee;
+		background: white;
 		overflow: hidden;
 		border-radius: 4px;
+		box-shadow: 5px 5px 10px silver;
 	}
 	
-	.drag_handle {
+	.drag {
 		padding: 14px;
-		background: #ddd;
+		background: whitesmoke;
 		cursor: move;
 	}
 	

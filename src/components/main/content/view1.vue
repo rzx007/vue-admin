@@ -4,7 +4,7 @@
 			<div class="col-md-12">
 				<div class="preview row">
 					<div class="total_members col-md-6 col-sm-6">
-						<span class="ario">会员总数：</span>
+						<span class="ario">总访问量：</span>
 						<strong>10000</strong>
 					</div>
 					<div class="col-md-6 col-sm-6 day_view">
@@ -19,6 +19,9 @@
 			<div class="col-md-6">
 				<chart2></chart2>
 			</div>
+			<div class="col-md-12">
+				<lastactive></lastactive>
+			</div>
 		</div>
 	</div>
 </template>
@@ -26,11 +29,13 @@
 import Sortable from "sortablejs"
 import chart1 from "./charts/chart1"
 import chart2 from "./charts/chart2"
+import Lastactive from "./charts/lastActive"
 	export default{
 		name:"view1",
 		components:{
 			chart1,
-			chart2
+			chart2,
+			Lastactive
 		},
 		mounted(){
 			var el = document.getElementById('items');
@@ -66,11 +71,6 @@ import chart2 from "./charts/chart2"
 		background: #eee;
 		 overflow: hidden;
 		 border-radius: 4px;
-	}
-	.drag_handle{
-		 padding: 14px;
-		 background: #ddd;
-		 cursor: move;
 	}
 	#viewChart{
 		height:260px;
