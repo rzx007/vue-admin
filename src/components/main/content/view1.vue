@@ -2,14 +2,18 @@
 	<div class="container">
 		<div class="row" id="items">
 			<div class="col-md-12">
-				<div class="preview row">
+				<div class="row">
 					<div class="total_members col-md-6 col-sm-6">
-						<span class="ario">总访问量：</span>
+						<div class="preview">
+							<span class="ario">总访问量：</span>
 						<strong>10000</strong>
+						</div>
 					</div>
 					<div class="col-md-6 col-sm-6 day_view">
-						<span class="ario">日访问量：</span>
-						<strong>1325</strong>
+						<div class="preview">
+							<span class="ario">日访问量：</span>
+							<strong>1325</strong>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -57,10 +61,11 @@ import Lastactive from "./charts/lastActive"
 		font-weight: 900;
 		height: 90px;
 		line-height: 90px;
-		 background-color: #eee;
+		 background-color: white;
 		 border-radius: 4px;
 		 margin-bottom: 18px;
 		 overflow: hidden;
+		 box-shadow: 5px 5px 10px silver;
 	}
 	.ario{
 		font-size: 20px;

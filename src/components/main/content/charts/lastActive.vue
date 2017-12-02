@@ -13,24 +13,14 @@
 					<div class="introduce">
 						<h5>{{item.title}}</h5>
 						<p class="content">{{item.content}}</p>
+						<router-link :to="{path:'/viewart',query:{id:item.artcil_id}}" class="text-right">
+							预览
+						</router-link>
 						<p class="time text-right">{{item.time}}</p>
 					</div>
 				</div>
 			</div>
 		</template>
-		<div class="col-sm-4">
-			<div class="last_active">
-				<p class="title">
-					<img src="../../../../assets/logo.png" alt="avtrel" class="img-circle avtrel" height="30px" width="30px" />
-					<span title="username">愤怒的倒霉熊</span>
-				</p>
-				<div class="introduce">
-					<h5>标题</h5>
-					<p class="content">将回调延迟到下次 DOM 更新循环之后执行。。。。</p>
-					<p class="time text-right">2017-12-02</p>
-				</div>
-			</div>
-		</div>
 	</div>
 </template>
 <script>
@@ -83,6 +73,7 @@
 		margin: 10px 0;
 		height: 60px;
 		overflow: hidden;
+		/*text-indent: 10px;*/
 	}
 	
 	.time {

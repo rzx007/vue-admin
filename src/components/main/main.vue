@@ -13,12 +13,12 @@
 
 			}
 		},
-
 	}
 </script>
 <style>
 	.rightWrap{
-		margin-left: 150px;
+		position: relative;
+		/*margin-left: 150px;*/
 		/*padding-left: 20px;*/
 		height: 100%;
 		overflow: auto;
