@@ -28,7 +28,7 @@ html,body{
   padding: 0;
   margin: 0;
   height: 100%;
-  background:rgba(7, 17, 27, .1);
+  background:#f1f1f1;
 }
 #app {
   height: 100%;

@@ -71,13 +71,14 @@
 		background: white;
 		overflow: hidden;
 		border-radius: 4px;
-		box-shadow: 5px 5px 10px silver;
+		 box-shadow: 2px 2px 10px gainsboro;
 	}
 	
 	.drag {
 		padding: 14px;
 		background: whitesmoke;
 		cursor: move;
+		border-bottom: 1px solid gainsboro;
 	}
 	
 	#viewChart1 {

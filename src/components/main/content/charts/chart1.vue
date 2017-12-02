@@ -64,6 +64,7 @@
 	.drag{
 		padding: 14px;
 		background: whitesmoke;		
+		border-bottom: 1px solid gainsboro;
 	}
 	
 	#viewChart {

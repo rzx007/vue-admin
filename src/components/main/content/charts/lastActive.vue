@@ -58,7 +58,7 @@
 		padding: 10px 10px;
 		border-radius: 4px;
 		overflow: hidden;
-		box-shadow: 5px 5px 10px silver;
+		box-shadow: 2px 2px 10px gainsboro;
 	}
 	
 	.avtrel {

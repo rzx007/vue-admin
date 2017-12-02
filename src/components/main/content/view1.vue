@@ -65,7 +65,7 @@ import Lastactive from "./charts/lastActive"
 		 border-radius: 4px;
 		 margin-bottom: 18px;
 		 overflow: hidden;
-		 box-shadow: 5px 5px 10px silver;
+		 box-shadow: 2px 2px 10px gainsboro;
 	}
 	.ario{
 		font-size: 20px;
