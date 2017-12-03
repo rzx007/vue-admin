@@ -12,11 +12,6 @@ export default new Router({
       path: '/',
       name: 'view1',
       component: view1,
-//    children:[
-//    	{
-//    		
-//    	}
-//    ]
     },{
     	path:"/bloglist",
     	name: 'view2',
