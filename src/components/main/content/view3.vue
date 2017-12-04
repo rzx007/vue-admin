@@ -9,7 +9,7 @@
 					</div>
 					<div class="descriptio ">
 						<label for="des">文章简介</label>
-						<input type="text" name="des" id="des" placeholder="文章简介，100字" />
+						<input type="text" name="des" id="des" placeholder="文章简介，100字" v-model="desc"/>
 					</div>
 					<div id="editorElem"></div>
 					<button v-on:click="save_blog" id="save" class="pull-right ">发布</button>
@@ -56,6 +56,7 @@
 			return {
 				editorContent: '',
 				title: '',
+				desc:'',
 				show: false,
 				selected: '0',
 				editid: '0',
@@ -92,13 +93,15 @@
 					title: this.title,
 					time: new Date().toLocaleString(),
 					type: this.selected,
-					id:this.$route.query.id
+					id:this.$route.query.id,
+					username:"愤怒的倒霉熊",
+					description:this.desc
 				}, {
 					emulateJSON: true
 				}).then(function(res) {
-					alert("发布成功！")
+//					alert("发布成功！")
 				}).then(function(){
-					this.$options.creatEdit.clear();
+//					this.$options.creatEdit.clear();
 				})
 			}
 		},
@@ -112,6 +115,7 @@
 					this.editorContent = res.body[0].content;
 					console.log(this.editorContent);
 					this.title = res.body[0].title;
+					this.desc = res.body[0].description;
 					//					console.log(this.$options.creatEdit.init());
 					var ed = this.$options.creatEdit.init();
 					ed.customConfig.onchange = (html) => {

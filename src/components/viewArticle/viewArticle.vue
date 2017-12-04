@@ -7,7 +7,12 @@
 	<div class="loading" v-if="loaded">
 			<em>数据加载中.....</em>
 	</div>
-	<div class="blogs" v-html="article" v-else></div>
+	<div class="blogs" v-else>
+		<h3>{{title}}</h3>
+		<div class="cont"  v-html="article">
+			
+		</div>
+	</div>
 </div>
 </template>
 
@@ -17,6 +22,7 @@
 		data(){
 			return{
 				article:'',
+				title:'',
 				loaded:'true'
 				
 			}
@@ -31,6 +37,7 @@
 				console.log(res.body[0])
 				let result = res.body[0];
 				this.article = result.content;
+				this.title = result.title;
 			}).then(function(){
 				this.loaded=false;
 			})
