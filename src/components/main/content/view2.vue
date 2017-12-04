@@ -9,17 +9,21 @@
 							<th>作者</th>
 							<th>编辑</th>
 							<th>删除</th>
+							<th>预览</th>
 						</tr>
 					</thead>
 					<tbody >
 					<template v-for="item in blogsList">
 						<tr>
-							<td style="width:70%;">{{item.title}}</td>
-							<td >愤怒的倒霉熊</td>
+							<td style="width:60%;">{{item.title}}</td>
+							<td >{{item.username}}</td>
 							<td >
 								<router-link :to="{path:'/newblog',query:{id:item.id}}">编辑</router-link>
 							</td>
 							<td>删除</td>
+							<td>
+								<router-link :to="{path:'/viewart',query:{id:item.id}}">预览</router-link>
+							</td>
 						</tr>
 					</template>
 					</tbody>

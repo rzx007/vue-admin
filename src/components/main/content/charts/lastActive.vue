@@ -3,8 +3,15 @@
 		<div class="col-sm-12 drag_handle aa">
 			<h3 class="text-left">最新动态</h3>
 		</div>
-		<template v-for="item in lastList">
+		<template v-if="loaded"  v-for="n in 6">
 			<div class="col-sm-4">
+				<div class="last_active last_active_loading">
+					
+				</div>
+			</div>
+		</template>
+		<template v-for="item in lastList" >
+			<div class="col-sm-4" >
 				<div class="last_active">
 					<p class="title">
 						<img src="../../../../assets/logo.png" alt="avtrel" class="img-circle avtrel" height="30px" width="30px" />
@@ -12,8 +19,10 @@
 					</p>
 					<div class="introduce">
 						<h5>{{item.title}}</h5>
-						<p class="content">{{item.content}}</p>
-						<router-link :to="{path:'/viewart',query:{id:item.artcil_id}}" class="text-right">
+						<p class="content" >
+							{{item.description? item.description : '作者太懒，没留下文章简介...'}}
+						</p>
+						<router-link :to="{path:'/viewart',query:{id:item.id}}" class="text-right">
 							预览
 						</router-link>
 						<p class="time text-right">{{item.time}}</p>
@@ -29,21 +38,19 @@
 		data() {
 			return {
 				lastList: [],
+				loaded:true
 			}
 		},
 		created() {
-			this.$http.get("/api/lastActive").then(function(res) {
-				if(res.body.errno == 0) {
-					this.lastList = res.body.data;
-				}
-			}, function(err) {
-				console.log(err)
-			})
+			this.$http.get("http://localhost/data/select_blogslist.php",)
+			.then(function(res){
+				this.loaded=false;
+				console.log(res);
+				this.lastList=res.body
+			})			
 		}
-
 	}
 </script>
-
 <style>
 	.listWrap {
 		margin-bottom: 18px;
@@ -71,12 +78,19 @@
 	
 	.content {
 		margin: 10px 0;
-		height: 60px;
+		height: 50px;
 		overflow: hidden;
-		/*text-indent: 10px;*/
+		/*white-space:nowrap;
+		text-overflow: ellipsis;*/
 	}
-	
+	.content  *{
+		font-size: 14px !important;
+	}
 	.time {
 		color: #9D9D9D;
+	}
+	.last_active_loading{
+		height: 195px;
+		background: gainsboro;
 	}
 </style>

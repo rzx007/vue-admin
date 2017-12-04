@@ -1,11 +1,15 @@
 <template>
 	<div class="watch">
-		<div class="container">
+		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-9">
 					<div class="set_title">
-						<span>设置标题</span>
-						<input type="text" name="titles" id="titles" ref="titles" placeholder="文章标题"/>
+						<label for="titles">设置标题</label>
+						<input type="text" name="titles" id="titles" ref="titles" placeholder="文章标题" v-model="title"/>
+					</div>
+					<div class="descriptio ">
+						<label for="des">文章简介</label>
+						<input type="text" name="des" id="des" placeholder="文章简介，100字" />
 					</div>
 					<div id="editorElem"></div>
 					<button v-on:click="save_blog" id="save" class="pull-right ">发布</button>
@@ -37,6 +41,7 @@
 			<div class="back text-left" @click="preview">
 				<button>返回编辑</button>
 			</div>
+			<h3>{{title}}</h3>
 			<div class="preview_content" v-html="editorContent"></div>
 		</div>
 	</div>
@@ -84,7 +89,7 @@
 				}
 				this.$http.post("http://localhost/data/save_blog.php", {
 					content: this.editorContent,
-					title: this.$refs.titles.value,
+					title: this.title,
 					time: new Date().toLocaleString(),
 					type: this.selected,
 					id:this.$route.query.id
@@ -106,7 +111,7 @@
 				.then(function(res) {
 					this.editorContent = res.body[0].content;
 					console.log(this.editorContent);
-					this.$refs.titles.value = res.body[0].title;
+					this.title = res.body[0].title;
 					//					console.log(this.$options.creatEdit.init());
 					var ed = this.$options.creatEdit.init();
 					ed.customConfig.onchange = (html) => {
@@ -135,17 +140,18 @@
 		width: 100%;
 		position: relative;
 		font-size: 14px;
+		padding: 30px 80px;
 	}
 	
 	.watch_preview {
-		min-height: 100%;
+		height: 100%;
 		width: 100%;
 		z-index: 10001;
 		position: absolute;
 		top: -18px;
 		left: 0;
 		text-align: left;
-		overflow: hidden;
+		overflow: auto;
 		background: white;
 		/*display: none;*/
 	}
@@ -161,10 +167,11 @@
 		margin-bottom: 20px;
 	}
 	
-	.set_title span {
+	.set_title label {
 		font-size: 26px;
-		font-weight: 400;
-		/*vertical-align: middle;*/
+		font-weight: 300;
+		width: 120px;
+		text-align: justify;
 	}
 	
 	.set_title input {
@@ -174,7 +181,22 @@
 		padding: 3px 6px;
 		font-size: 28px;
 	}
-	
+	.descriptio{
+		margin-bottom: 20px;
+	}
+	.descriptio label{
+		font-size: 20px;
+		font-weight: 200;
+		width: 120px;
+		text-align: justify;
+	}
+	.descriptio input {
+		width: 80%;
+		border: 1px solid gainsboro;
+		border-radius: 4px;
+		padding: 3px 6px;
+		font-size: 20px;
+	}
 	#save {
 		background: #23282d;
 		border: none;
@@ -224,5 +246,8 @@
 		box-sizing: border-box;
 		padding: 20px 80px;
 		overflow: hidden;
+	}
+	.preview_content img{
+		width: 60%;
 	}
 </style>
