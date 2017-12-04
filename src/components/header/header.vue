@@ -56,7 +56,8 @@ export default {
 .person{
   height: 100%;
   width: auto;
- margin-top:5px;
+  margin-top:5px;
+  color: whitesmoke;
 }
 .navbar-toggle{
   border-color: transparent !important;
