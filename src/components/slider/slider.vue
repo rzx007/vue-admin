@@ -22,7 +22,7 @@
 		name:"main",
 		data(){
 			return{
-				navs:{"数据概览":"/","最新发布":"/bloglist","发布博客":"/newblog"},
+				navs:{"数据概览":"/","文章列表":"/bloglist","发布博客":"/newblog"},
 				others:'otherdata',
 				closes:false,
 			}

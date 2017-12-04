@@ -5,7 +5,7 @@
 				<div class="col-md-9">
 					<div class="set_title">
 						<span>设置标题</span>
-						<input type="text" name="titles" id="titles" ref="titles" />
+						<input type="text" name="titles" id="titles" ref="titles" placeholder="文章标题"/>
 					</div>
 					<div id="editorElem"></div>
 					<button v-on:click="save_blog" id="save" class="pull-right ">发布</button>
@@ -25,7 +25,8 @@
 								<select v-model="selected">
 									<option value="0">公开</option>
 									<option value="1">不公开</option>
-								</select>								
+								</select>
+								{{$route.query.id}}
 							</p>
 						</div>
 					</div>
@@ -55,6 +56,20 @@
 				editid: '0',
 			}
 		},
+		creatEdit: {
+			init() {
+				var editor = new E('#editorElem');
+				return editor;
+			},
+			clear(){
+				this.editorContent = "";
+				this.title= '';
+				var ed = new E('#editorElem');
+				ed.create()
+				ed.txt.html('');
+				document.getElementById("titles").value=null;
+			}
+		},
 		methods: {
 			getContent: function() {
 				//				alert(this.editorContent)
@@ -71,30 +86,32 @@
 					content: this.editorContent,
 					title: this.$refs.titles.value,
 					time: new Date().toLocaleString(),
-					type: this.selected
+					type: this.selected,
+					id:this.$route.query.id
 				}, {
 					emulateJSON: true
 				}).then(function(res) {
-//					console.log(res)
+					alert("发布成功！")
+				}).then(function(){
+					this.$options.creatEdit.clear();
 				})
 			}
 		},
-		creatEdit:{
-			init(){
-				var editor = new E('#editorElem');
-				return editor;
-			}
-		},
+		
 		created() {
 			if(!this.$route.query.id) {
 				return false;
 			}
 			this.$http.get("http://localhost/data/editer.php?id=" + this.$route.query.id)
 				.then(function(res) {
-					this.editorContent = res.body[0].content;	
-					this.$refs.titles.value  = res.body[0].title;
-//					console.log(this.$options.creatEdit.init());
-					var ed = this.$options.creatEdit.init()
+					this.editorContent = res.body[0].content;
+					console.log(this.editorContent);
+					this.$refs.titles.value = res.body[0].title;
+					//					console.log(this.$options.creatEdit.init());
+					var ed = this.$options.creatEdit.init();
+					ed.customConfig.onchange = (html) => {
+						this.editorContent = html
+					}
 					ed.create()
 					ed.txt.html(res.body[0].content);
 				})
@@ -107,8 +124,8 @@
 			ed.customConfig.zIndex = 100
 			ed.create()
 		},
-		destroyed(){
-			this.$route.query.id=null;
+		destroyed() {
+			this.$route.query.id = null;
 		}
 	}
 </script>
@@ -147,14 +164,15 @@
 	.set_title span {
 		font-size: 26px;
 		font-weight: 400;
-		vertical-align: middle;
+		/*vertical-align: middle;*/
 	}
 	
 	.set_title input {
 		width: 80%;
 		border: 1px solid gainsboro;
 		border-radius: 4px;
-		padding: 6px;
+		padding: 3px 6px;
+		font-size: 28px;
 	}
 	
 	#save {
