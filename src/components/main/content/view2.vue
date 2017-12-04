@@ -8,6 +8,7 @@
 							<th>文章标题</th>
 							<th>作者</th>
 							<th>编辑</th>
+							<th>删除</th>
 						</tr>
 					</thead>
 					<tbody >
@@ -18,6 +19,7 @@
 							<td >
 								<router-link :to="{path:'/newblog',query:{id:item.id}}">编辑</router-link>
 							</td>
+							<td>删除</td>
 						</tr>
 					</template>
 					</tbody>
@@ -42,10 +44,6 @@ export default{
 			this.blogsList=res.body
 		})
 	},
-	methods:{
-		
-	},
-	
 }
 </script>
 <style>

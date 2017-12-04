@@ -5,7 +5,7 @@ import Router from 'vue-router'
 //import view3 from '@/components/main/content/view3'
 import viewarticle from "@/components/viewArticle/viewArticle"
 //路由懒加载
-const view1 = () => import('@/components/main/content/view1');
+const view1 = () => import(/* webpackChunkName: "group-view" */'@/components/main/content/view1');
 const view2 = () => import('@/components/main/content/view2');
 const view3 = () => import('@/components/main/content/view3');
 Vue.use(Router)
