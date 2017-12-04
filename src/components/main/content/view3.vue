@@ -126,7 +126,6 @@
 
 			}
 		},
-
 		created() {
 			if(!this.$route.query.id) {
 				return false;

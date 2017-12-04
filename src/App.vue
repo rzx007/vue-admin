@@ -3,12 +3,11 @@
     <headers></headers>    
     <div class="main">
       <sliders></sliders>
-      <mains>
-      </mains>
+      <mains></mains>
     </div>
+    
   </div>
 </template>
-
 <script>
 import headers from "./components/header/header"
 import sliders from "./components/slider/slider"
@@ -19,6 +18,12 @@ export default {
     headers,
     sliders,
     mains
+  },
+  created(){
+		sessionStorage.username="愤怒的倒霉熊";
+  	if(!sessionStorage.username){
+  		this.$router.push('/login')
+  	}
   }
 }
 </script>
