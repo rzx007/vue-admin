@@ -5,11 +5,11 @@
 				<div class="col-md-9">
 					<div class="set_title">
 						<label for="titles">设置标题</label>
-						<input type="text" name="titles" id="titles" ref="titles" placeholder="文章标题" v-model="title"/>
+						<input type="text" name="titles" id="titles" ref="titles" placeholder="文章标题" v-model="title" />
 					</div>
 					<div class="descriptio ">
 						<label for="des">文章简介</label>
-						<input type="text" name="des" id="des" placeholder="文章简介，100字" v-model="desc"/>
+						<input type="text" name="des" id="des" placeholder="文章简介，100字" v-model="desc" />
 					</div>
 					<div id="editorElem"></div>
 					<button v-on:click="save_blog" id="save" class="pull-right ">发布</button>
@@ -44,36 +44,44 @@
 			<h3>{{title}}</h3>
 			<div class="preview_content" v-html="editorContent"></div>
 		</div>
+		<totast :text="loading" v-show="coverShow"></totast>
 	</div>
 </template>
 <script>
 	//引入富文本编辑器
 	import Bus from "../../../assets/eventBus"
 	import E from "wangeditor"
+	import totast from "../../tostat/tostat"
 	export default {
 		name: "view3",
 		data() {
 			return {
 				editorContent: '',
 				title: '',
-				desc:'',
+				desc: '',
 				show: false,
 				selected: '0',
 				editid: '0',
+				loading:'文章提交中...',
+				coverShow:false,
 			}
+		},
+		components:{
+			totast
 		},
 		creatEdit: {
 			init() {
 				var editor = new E('#editorElem');
 				return editor;
 			},
-			clear(){
+			clear() {
 				this.editorContent = "";
-				this.title= '';
+				this.title = '';
+				this.desc = '';
 				var ed = new E('#editorElem');
 				ed.create()
 				ed.txt.html('');
-				document.getElementById("titles").value=null;
+				document.getElementById("titles").value = null;
 			}
 		},
 		methods: {
@@ -84,28 +92,41 @@
 				this.show = !this.show;
 			},
 			save_blog() {
-				if(!this.editorContent) {
+				if(!this.editorContent||!this.title) {
 					alert('内容或者标题不能为空')
 					return false;
+				} else {
+					this.coverShow=true;
+					this.$http.post("http://localhost/data/save_blog.php", {
+						content: this.editorContent,
+						title: this.title,
+						time: new Date().toLocaleString(),
+						type: this.selected,
+						id: this.$route.query.id,
+						username: "愤怒的倒霉熊",
+						description: this.desc
+					}, {
+						emulateJSON: true
+					}).then(function(res) {
+						this.loading ='文章发布成功！';
+						this.$options.creatEdit.clear();
+						let that =this;
+						setTimeout(function(){
+							that.coverShow=false;
+						},300)
+						
+					}, function() {
+						this.loading ='文章发布失败！'
+						let that =this;
+						setTimeout(function(){
+							that.coverShow=false;
+						},300)
+					})
 				}
-				this.$http.post("http://localhost/data/save_blog.php", {
-					content: this.editorContent,
-					title: this.title,
-					time: new Date().toLocaleString(),
-					type: this.selected,
-					id:this.$route.query.id,
-					username:"愤怒的倒霉熊",
-					description:this.desc
-				}, {
-					emulateJSON: true
-				}).then(function(res) {
-//					alert("发布成功！")
-				}).then(function(){
-//					this.$options.creatEdit.clear();
-				})
+
 			}
 		},
-		
+
 		created() {
 			if(!this.$route.query.id) {
 				return false;
@@ -185,15 +206,18 @@
 		padding: 3px 6px;
 		font-size: 28px;
 	}
-	.descriptio{
+	
+	.descriptio {
 		margin-bottom: 20px;
 	}
-	.descriptio label{
+	
+	.descriptio label {
 		font-size: 20px;
 		font-weight: 200;
 		width: 120px;
 		text-align: justify;
 	}
+	
 	.descriptio input {
 		width: 80%;
 		border: 1px solid gainsboro;
@@ -201,6 +225,7 @@
 		padding: 3px 6px;
 		font-size: 20px;
 	}
+	
 	#save {
 		background: #23282d;
 		border: none;
@@ -251,7 +276,8 @@
 		padding: 20px 80px;
 		overflow: hidden;
 	}
-	.preview_content img{
+	
+	.preview_content img {
 		width: 60%;
 	}
 </style>
