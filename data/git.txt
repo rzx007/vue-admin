@@ -7,3 +7,16 @@
 git fetch --all
 git reset --hard origin/master
 git fetch 只是下载远程的库的内容，不做任何的合并git reset 把HEAD指向刚刚下载的最新的版本
+
+//忽略不需要提交的文件
+1.文件夹内右键git bash，输 touch .gitignore，注意中间有空格。 
+2.编辑器打开生成的 .gitignore 文件，加入:
+
+node_modules
+
+/*以及其他你想要忽略的文件或文件夹*/
+1
+2
+3
+3.保存。 
+4.以后再add到暂存区的时候就会忽略你配置的文件或文件夹了。
